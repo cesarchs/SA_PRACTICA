@@ -1,53 +1,36 @@
 const axios = require('axios');
-const soap = require('soap');
 
-// Realizar una petición SOAP a la API de Marvel
-async function makeMarvelSoapRequest() {
-  const url = 'https://gateway.marvel.com/v1/public?wsdl';
-  const client = await soap.createClientAsync(url);
 
-  const args = {
-    publicKey: 'TU_PUBLIC_KEY',
-    privateKey: 'TU_PRIVATE_KEY'
-  };
-
-  client.describe().MarvelService.MarvelOperations.getCharacters({}, function (err, result) {
-    if (err) {
-      console.error('Error en la petición SOAP de Marvel:', err);
-    } else {
-      console.log('Resultado de la petición SOAP de Marvel:', result);
-    }
-  });
-}
-
-makeMarvelSoapRequest();
-
-// Realizar una petición REST a la PokeAPI
-async function makePokeApiRestRequest() {
-  const restUrl = 'https://pokeapi.co/api/v2/pokemon/1';
+//  REST a PokeAPI
+ async function PokeApiRest() {
+  const restUrl = 'https://pokeapi.co/api/v2/pokemon/ditto';
 
   try {
     const response = await axios.get(restUrl);
-    console.log('Respuesta de la petición REST a la PokeAPI:');
+    console.log('Respuesta de PokeAPI');
     console.log(response.data);
   } catch (error) {
-    console.error('Error en la petición REST a la PokeAPI:', error);
+    console.error( error);
+    console.error('Error PokeAPI');
   }
 }
 
-makePokeApiRestRequest();
+PokeApiRest();
 
-// Realizar una petición REST a la API de SpaceX
-async function makeSpaceXRestRequest() {
+// REST a SpaceX
+ async function SpaceXRest() {
   const restUrl = 'https://api.spacexdata.com/v4/launches/latest';
 
   try {
     const response = await axios.get(restUrl);
-    console.log('Respuesta de la petición REST a la API de SpaceX:');
+    console.log('Respuesta SpaceX');
     console.log(response.data);
+    axios.send(response.data);
   } catch (error) {
-    console.error('Error en la petición REST a la API de SpaceX:', error);
+    console.error(error);
+    console.error('Error SpaceX');
   }
 }
 
-makeSpaceXRestRequest();
+SpaceXRest();
+
